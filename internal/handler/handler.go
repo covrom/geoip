@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/binary"
 	"encoding/json"
+	"expvar"
 	"math/big"
 	"net"
 	"net/http"
@@ -48,6 +49,8 @@ func New() *http.ServeMux {
 			Err: "not found",
 		})
 	})
+
+	mux.Handle("GET /metrics", expvar.Handler())
 
 	return mux
 }
