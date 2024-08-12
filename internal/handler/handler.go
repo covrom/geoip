@@ -50,7 +50,6 @@ func New(static embed.FS) *http.ServeMux {
 			}
 		}
 
-		w.WriteHeader(http.StatusNotFound)
 		enc.Encode(Response{
 			IP:  addr_param,
 			Err: "not found",
