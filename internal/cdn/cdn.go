@@ -26,7 +26,7 @@ var (
 	ipv6csv []byte
 
 	hcli = &http.Client{
-		Timeout: 10 * time.Minute,
+		Timeout: 2 * time.Minute,
 	}
 )
 
