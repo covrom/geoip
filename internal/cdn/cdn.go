@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"sync"
+	"time"
 )
 
 const (
@@ -27,6 +28,10 @@ var (
 
 	ipv4csv,
 	ipv6csv []byte
+
+	hcli = &http.Client{
+		Timeout: 10 * time.Minute,
+	}
 )
 
 func getSHA256(bytes []byte) string {
@@ -38,7 +43,7 @@ func getSHA256(bytes []byte) string {
 }
 
 func getRemoteSHA256(urlFile string) (string, error) {
-	resp, err := http.Get(urlFile)
+	resp, err := hcli.Get(urlFile)
 	if err != nil {
 		return "", err
 	}
@@ -98,7 +103,7 @@ func Update() error {
 }
 
 func downloadFile(dest *[]byte, url string) error {
-	resp, err := http.Get(url)
+	resp, err := hcli.Get(url)
 	if err != nil {
 		return err
 	}
