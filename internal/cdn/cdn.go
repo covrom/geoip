@@ -12,11 +12,11 @@ import (
 )
 
 const (
-	url4     = "https://cdn.jsdelivr.net/gh/sapics/ip-location-db/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
-	url4hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
+	url4     = "https://raw.githubusercontent.com/sapics/ip-location-db/main/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
+	url4hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv?ref=main"
 
-	url6     = "https://cdn.jsdelivr.net/gh/sapics/ip-location-db/geo-asn-country/geo-asn-country-ipv6-num.csv"
-	url6hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-asn-country/geo-asn-country-ipv6-num.csv"
+	url6     = "https://raw.githubusercontent.com/sapics/ip-location-db/main/geo-asn-country/geo-asn-country-ipv6-num.csv"
+	url6hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-asn-country/geo-asn-country-ipv6-num.csv?ref=main"
 )
 
 var (
