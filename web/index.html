@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/pico.red.min.css" />
+  <script defer src="js/alpine.js"></script>
+  <title>IP Geolocation</title>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Search</h1>
+    <article>
+      <form
+            action=""
+            @submit.prevent="doing = true; result = await doit(ip_addr); doing = false"
+            x-data="{ ip_addr: '', result: '', doing: false }">
+        <input type="text" x-model="ip_addr" placeholder="IP address v4 or v6" />
+        <input type="submit" value="Search" :disabled="doing" />
+        <article :x-show="result" x-text="result" style="white-space: pre-wrap"></article>
+        <span :aria-busy="doing"></span>
+      </form>
+    </article>
+  </main>
+  <script>
+    async function doit(ip_addr) {
+      let response = await fetch("/getIpInfo/" + ip_addr, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        // body: JSON.stringify(request),
+      });
+      if (response.ok) {
+        let jsonResult = await response.json();
+        return JSON.stringify(jsonResult, null, 2);
+      } else {
+        alert("HTTP Error: " + response.status);
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"log/slog"
 	"net/http"
 	"os"
@@ -12,6 +13,9 @@ import (
 	"github.com/covrom/geoip/internal/addr"
 	"github.com/covrom/geoip/internal/handler"
 )
+
+//go:embed web
+var staticFiles embed.FS
 
 func main() {
 	l := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
@@ -35,7 +39,7 @@ func main() {
 
 	srv := http.Server{
 		Addr:           listen,
-		Handler:        handler.New(),
+		Handler:        handler.New(staticFiles),
 		ReadTimeout:    time.Minute,
 		WriteTimeout:   time.Minute,
 		MaxHeaderBytes: 1 << 20,

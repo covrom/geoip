@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"embed"
 	"encoding/binary"
 	"encoding/json"
 	"expvar"
@@ -9,6 +10,8 @@ import (
 	"net/http"
 
 	"github.com/covrom/geoip/internal/addr"
+	"github.com/vearutop/statigz"
+	"github.com/vearutop/statigz/brotli"
 )
 
 type Response struct {
@@ -17,8 +20,12 @@ type Response struct {
 	Country string `json:"country,omitempty"`
 }
 
-func New() *http.ServeMux {
+func New(static embed.FS) *http.ServeMux {
 	mux := http.NewServeMux()
+
+	fs := statigz.FileServer(static, brotli.AddEncoding, statigz.FSPrefix("web"))
+	mux.Handle("GET /", fs)
+
 	mux.HandleFunc("POST /getIpInfo/{addr}", func(w http.ResponseWriter, r *http.Request) {
 		addr_param := r.PathValue("addr")
 		items := addr.Current()
