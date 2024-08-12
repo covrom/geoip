@@ -12,18 +12,14 @@ import (
 )
 
 const (
-	githubRepo = "sapics/ip-location-db"
-	ipv4file   = "geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
-	ipv6file   = "geo-asn-country/geo-asn-country-ipv6-num.csv"
+	url4     = "https://cdn.jsdelivr.net/gh/sapics/ip-location-db/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
+	url4hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-whois-asn-country/geo-whois-asn-country-ipv4-num.csv"
+
+	url6     = "https://cdn.jsdelivr.net/gh/sapics/ip-location-db/geo-asn-country/geo-asn-country-ipv6-num.csv"
+	url6hash = "https://api.github.com/repos/sapics/ip-location-db/contents/geo-asn-country/geo-asn-country-ipv6-num.csv"
 )
 
 var (
-	url4     = fmt.Sprintf("https://cdn.jsdelivr.net/gh/%s/%s", githubRepo, ipv4file)
-	url4hash = fmt.Sprintf("https://api.github.com/repos/%s/contents/%s", githubRepo, ipv4file)
-
-	url6     = fmt.Sprintf("https://cdn.jsdelivr.net/gh/%s/%s", githubRepo, ipv6file)
-	url6hash = fmt.Sprintf("https://api.github.com/repos/%s/contents/%s", githubRepo, ipv6file)
-
 	mu sync.RWMutex
 
 	ipv4csv,
